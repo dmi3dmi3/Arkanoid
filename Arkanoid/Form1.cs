@@ -26,7 +26,10 @@ namespace Arkanoid
             g.FillRectangle(SystemBrushes.Window, new Rectangle(0, 0, PlayPnl.Width, PlayPnl.Height));
             foreach (Item item in Render.items)
             {
-                g.FillRectangle(Brushes.Black, new RectangleF(item.CornerLocation, item.Size));
+                if (item is Ball)
+                    g.FillEllipse(Brushes.Black, new RectangleF(item.CornerLocation, item.Size));
+                else
+                    g.FillRectangle(Brushes.Black, new RectangleF(item.CornerLocation, item.Size));
             }
             
         }
@@ -41,8 +44,11 @@ namespace Arkanoid
                 case Keys.D:
                     GameControl.SetRight();
                     break;
-                case Keys.Escape:
-                    GameControl.Stop();
+                case Keys.Space:
+                    if (timer.Enabled)
+                        timer.Stop();
+                    else
+                        timer.Start();
                     break;                    
             }
         }
@@ -66,6 +72,8 @@ namespace Arkanoid
         {
             game = new Game();
             PlayBtn.Visible = false;
+            PlayBtn.Enabled = false;
+            Focus();
             Invalidate();
             game.Start();
             timer.Start();

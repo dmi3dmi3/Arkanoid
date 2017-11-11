@@ -10,6 +10,7 @@ namespace Arkanoid.Classes
     class Game
     {
         private Bat bat;
+        private Ball ball;
 
         public Game(){}
 
@@ -17,6 +18,8 @@ namespace Arkanoid.Classes
         {
             bat = new Bat();
             Render.items.Add(bat);
+            ball = new Ball();
+            Render.items.Add(ball);
             GameControl.Start();
         }
         public void Play()
@@ -28,6 +31,9 @@ namespace Arkanoid.Classes
                 else if (GameControl.MoveRight)
                     bat.MoveRight();
             }
+
+            ball.Move();
+            ball.CheckBall(bat);
         }
 
         public void Stop()

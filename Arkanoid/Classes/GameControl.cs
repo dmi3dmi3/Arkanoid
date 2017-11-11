@@ -52,7 +52,7 @@ namespace Arkanoid.Classes
         }
         static public void Stop()
         {
-            PlayFlag = true;
+            PlayFlag = false;
             MoveRight = false;
             MoveLeft = false;
             KeyDown = false;

@@ -9,12 +9,12 @@ namespace Arkanoid.Classes
 {
     abstract class Item
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public float X { get; set; }
+        public float Y { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-        public Point CornerLocation { get { return new Point(X - Width / 2, Y - Height / 2); } }
-        public Point CenterLocation { get { return new Point(X, Y); } }
+        public Point CornerLocation { get { return new Point((int)X - Width / 2, (int)Y - Height / 2); } }
+        public Point CenterLocation { get { return new Point((int)X, (int)Y); } }
         public Size Size { get { return new Size(Width, Height); } }
 
         public Item(int a, int b, int c, int d)
