@@ -12,6 +12,8 @@ namespace Arkanoid.Classes
         public float Angle {private set {
                 if (value < 0)
                     _angel = value + 360;
+                else if (value >= 360)
+                    _angel = value % 360;
                 else
                     _angel = value;
             }
@@ -19,7 +21,7 @@ namespace Arkanoid.Classes
 
         public Ball() : base(Constant.pnlW / 2, Constant.pnlH - 24, 20,20)
         {
-            Angle = 300;
+            Angle = 360-46;
         }
 
         public void Move()
@@ -30,36 +32,56 @@ namespace Arkanoid.Classes
 
         private void CheckWalls()
         {
-       /*     float tang;
-            tang = 90 - Angle % 90;
             if (X > Constant.pnlW - Width / 2)
-                if (Angle % 180 == 0)
-                    Angle -= 180;
+                if (Angle == 0)
+                    Angle = 179;
+            else
+            {
+                if (Angle > 180)
+                    Angle = 270 - Angle % 270;
                 else
-                    Angle += Angle < 180 ? tang : -tang;
-            else if (X < Width / 2)
-                if (Angle % 180 == 0)
-                    Angle -= 180;
+                    Angle = 180 - Angle % 90;
+            }
+            else if (X<Width/2)
+            {
+                if (Angle == 180)
+                    Angle = -1;
                 else
-                    Angle += Angle < 180 ? -tang : tang;
-            else if (Y < Height / 2)
-                if (Angle % 180 == 90)
-                    Angle -= 180;
+                {
+                    if (Angle > 180)
+                        Angle = 360 - Angle % 180;
+                    else
+                        Angle = 90 - Angle % 90;
+                }
+            }
+            else if(Y < Height / 2)
+            {
+                if (Angle == 270)
+                    Angle = 90;
                 else
-                    Angle += -tang;
-            else if (Y > Constant.pnlH + Height/2)
-            { }*/
+                {
+                  //  if (Angle > 180)
+                    //    Angle = 180 - Angle % 180;
+                   // else
+                        Angle = 360 - Angle;
+                }
+            }
         }
 
         public void CheckBat(Bat bat)
         {
-       /*     float tang;
-            tang = 90 - Angle % 90;
             if (bat.X - bat.Width / 2 < X && X < bat.X + bat.Width / 2 && Y > bat.Y - bat.Height / 2 - Height / 2)
-                if (Angle % 180 == 90)
-                    Angle -= 180;
+            {
+                if (Angle == 90)
+                    Angle = 271;
                 else
-                    Angle += -tang;*/
+                {
+                    if (Angle < 270)
+                        Angle = 360 - Angle % 180;
+                    else
+                        Angle = 270 - Angle % 90;
+                }
+            }
         }
 
         public void CheckBall(Bat bat)
