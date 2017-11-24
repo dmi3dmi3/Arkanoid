@@ -9,8 +9,8 @@ namespace Arkanoid.Classes
 {
     abstract class Item
     {
-        public float X { get; set; }
-        public float Y { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
         public Point CornerLocation { get { return new Point((int)X - Width / 2, (int)Y - Height / 2); } }
@@ -24,7 +24,6 @@ namespace Arkanoid.Classes
             Width = c;
             Height = d;
         }
-
         public Item(Point p, Size s)
         {
             X = p.X;

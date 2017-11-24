@@ -3,85 +3,48 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+
+
 
 namespace Arkanoid.Classes
 {
     class Ball : Item
     {
-        private float _angel;
-        public float Angle {private set {
-                if (value < 0)
-                    _angel = value + 360;
-                else if (value >= 360)
-                    _angel = value % 360;
-                else
-                    _angel = value;
-            }
-            get { return _angel; } }
+        private Vector velVec;
+        private double vel;
+        private Vector Hor = new Vector(1, 0);
+        private Vector Ver = new Vector(0, 1);
 
         public Ball() : base(Constant.pnlW / 2, Constant.pnlH - 24, 20,20)
         {
-            Angle = 360-46;
+            velVec = new Vector(-10, -5).Normalize();
+            vel = 4;
         }
 
         public void Move()
         {
-            X = X + (float)(4 * Math.Cos(Angle * Math.PI / 180));
-            Y = Y + (float)(4 * Math.Sin(Angle * Math.PI / 180));
+            X += vel * velVec.X;
+            Y += vel * velVec.Y;
         }
 
         private void CheckWalls()
         {
-            if (X > Constant.pnlW - Width / 2)
-                if (Angle == 0)
-                    Angle = 179;
-            else
-            {
-                if (Angle > 180)
-                    Angle = 270 - Angle % 270;
-                else
-                    Angle = 180 - Angle % 90;
-            }
-            else if (X<Width/2)
-            {
-                if (Angle == 180)
-                    Angle = -1;
-                else
-                {
-                    if (Angle > 180)
-                        Angle = 360 - Angle % 180;
-                    else
-                        Angle = 90 - Angle % 90;
-                }
-            }
-            else if(Y < Height / 2)
-            {
-                if (Angle == 270)
-                    Angle = 90;
-                else
-                {
-                  //  if (Angle > 180)
-                    //    Angle = 180 - Angle % 180;
-                   // else
-                        Angle = 360 - Angle;
-                }
-            }
+            if (X > Constant.pnlW - Width / 2 || X < Width / 2)
+                velVec = velVec.Reflect(Ver);
+            else if (Y < Height / 2)
+                velVec = velVec.Reflect(Hor);
         }
 
         public void CheckBat(Bat bat)
         {
-            if (bat.X - bat.Width / 2 < X && X < bat.X + bat.Width / 2 && Y > bat.Y - bat.Height / 2 - Height / 2)
-            {
-                if (Angle == 90)
-                    Angle = 271;
-                else
-                {
-                    if (Angle < 270)
-                        Angle = 360 - Angle % 180;
-                    else
-                        Angle = 270 - Angle % 90;
-                }
-            }
+            if (X > bat.Left && X < bat.Right && Y >= bat.Top - Height / 2)
+                velVec = velVec.Reflect(Hor);
+            else if ((Y < bat.Top && Y > bat.Bottom) && (X >= bat.Left - Width / 2 || X <= bat.Right + Width / 2))
+                velVec = velVec.Reflect(Ver);
+            else if (new Vector(new PointD(X, Y), new PointD(bat.Left, bat.Top)).Length <= Width / 2 ||
+                     new Vector(new PointD(X, Y), new PointD(bat.Right, bat.Top)).Length <= Width / 2)
+                    velVec = velVec.Negate();
         }
 
         public void CheckBall(Bat bat)
