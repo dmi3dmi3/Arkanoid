@@ -27,9 +27,15 @@ namespace Arkanoid
             foreach (Item item in Render.items)
             {
                 if (item is Ball)
-                    g.FillEllipse(Brushes.Black, new RectangleF(item.CornerLocation, item.Size));
+                    g.FillEllipse(Brushes.Black, new RectangleF(
+                        (float)item.CornerLocation.X, (float)item.CornerLocation.Y, 
+                        (float)item.Width, (float)item.Height)
+                        );
                 else
-                    g.FillRectangle(Brushes.Black, new RectangleF(item.CornerLocation, item.Size));
+                    g.FillRectangle(Brushes.Black, new RectangleF(
+                        (float)item.CornerLocation.X, (float)item.CornerLocation.Y,
+                        (float)item.Width, (float)item.Height)
+                        );
             }
             
         }

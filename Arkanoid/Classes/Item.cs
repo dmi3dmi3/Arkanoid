@@ -11,11 +11,11 @@ namespace Arkanoid.Classes
     {
         public double X { get; set; }
         public double Y { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
-        public Point CornerLocation { get { return new Point((int)X - Width / 2, (int)Y - Height / 2); } }
-        public Point CenterLocation { get { return new Point((int)X, (int)Y); } }
-        public Size Size { get { return new Size(Width, Height); } }
+        public double Width { get; set; }
+        public double Height { get; set; }
+        public PointD CornerLocation { get { return new PointD(X - Width / 2, Y - Height / 2); } }
+        public PointD CenterLocation { get { return new PointD(X, Y); } }
+        public SizeF Size { get { return new SizeF((float)Width, (float)Height); } }
 
         public Item(int a, int b, int c, int d)
         {

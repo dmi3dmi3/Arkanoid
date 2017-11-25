@@ -9,8 +9,8 @@ namespace Arkanoid.Classes
 {
     class Bat:Item
     {
-        public Bat():base(Constant.pnlW / 2, Constant.pnlH - 10, 50, 8){}
-        private const int v = 3;
+        public Bat():base(Constant.pnlW / 2, Constant.pnlH - 10, 100, 8){}
+        private const int v = 5;
         public double Left { get { return X - Width / 2; } }
         public double Right { get { return X + Width / 2; } }
         public double Top { get { return Y - Height / 2; } }

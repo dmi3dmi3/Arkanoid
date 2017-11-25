@@ -19,32 +19,37 @@ namespace Arkanoid.Classes
         public Ball() : base(Constant.pnlW / 2, Constant.pnlH - 24, 20,20)
         {
             velVec = new Vector(-10, -5).Normalize();
-            vel = 4;
+            vel = 5;
         }
-
         public void Move()
         {
             X += vel * velVec.X;
             Y += vel * velVec.Y;
         }
-
         private void CheckWalls()
         {
-            if (X > Constant.pnlW - Width / 2 || X < Width / 2)
-                velVec = velVec.Reflect(Ver);
-            else if (Y < Height / 2)
-                velVec = velVec.Reflect(Hor);
+            if (Y < Height / 2)
+            { velVec = velVec.Reflect(Hor); Move(); }
+            else if (X > Constant.pnlW - Width / 2 || X < Width / 2)
+            { velVec = velVec.Reflect(Ver); Move(); }
         }
 
-        public void CheckBat(Bat bat)
+        private void CheckBat(Bat bat)
         {
-            if (X > bat.Left && X < bat.Right && Y >= bat.Top - Height / 2)
-                velVec = velVec.Reflect(Hor);
-            else if ((Y < bat.Top && Y > bat.Bottom) && (X >= bat.Left - Width / 2 || X <= bat.Right + Width / 2))
-                velVec = velVec.Reflect(Ver);
-            else if (new Vector(new PointD(X, Y), new PointD(bat.Left, bat.Top)).Length <= Width / 2 ||
-                     new Vector(new PointD(X, Y), new PointD(bat.Right, bat.Top)).Length <= Width / 2)
-                    velVec = velVec.Negate();
+            if (X > bat.Left - Width / 2 && X < bat.Right + Width / 2 && Y >= bat.Top - Height / 2)
+            {
+                if (X > bat.Left && X < bat.Right && Y >= bat.Top - Height / 2)
+                {
+                    velVec.Set(-4 + (8 / bat.Width) * (X - bat.Left), -1);
+                    velVec = velVec.Normalize();
+                }
+                else if ((X - bat.Left) * (X - bat.Left) + (Y - bat.Top) * (Y - bat.Top) < Width / 2 * Width / 2 ||
+                         (X - bat.Right) * (X - bat.Right) + (Y - bat.Top) * (Y - bat.Top) < Width / 2 * Width / 2)
+                {
+                    velVec.Set(-3 + (6 / bat.Width) * (X - bat.Left), -1);
+                    velVec = velVec.Normalize();
+                }
+            }
         }
 
         public void CheckBall(Bat bat)
