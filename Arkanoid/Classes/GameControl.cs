@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Arkanoid.Classes.Items;
 
 namespace Arkanoid.Classes
 {
@@ -57,5 +58,7 @@ namespace Arkanoid.Classes
             MoveLeft = false;
             KeyDown = false;
         }
+
+        public static List<Item> render = new List<Item>();
     }
 }

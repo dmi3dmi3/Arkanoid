@@ -8,7 +8,7 @@ namespace Arkanoid.Classes
 {
     static class Constant
     {
-        public const int pnlW = 400;
-        public const int pnlH = 420;
+        public const double pnlW = 400;
+        public const double pnlH = 420;
     }
 }

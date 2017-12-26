@@ -7,7 +7,7 @@ using System.Windows;
 
 
 
-namespace Arkanoid.Classes
+namespace Arkanoid.Classes.Items
 {
     class Ball : Item
     {

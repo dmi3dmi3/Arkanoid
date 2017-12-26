@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Arkanoid.Classes;
+using Arkanoid.Classes.Items;
+
 
 namespace Arkanoid
 {
@@ -16,6 +18,7 @@ namespace Arkanoid
         public Form1()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;   
         }
 
         private Game game;
@@ -24,7 +27,7 @@ namespace Arkanoid
         {            
             Graphics g = Graphics.FromHwnd(PlayPnl.Handle);
             g.FillRectangle(SystemBrushes.Window, new Rectangle(0, 0, PlayPnl.Width, PlayPnl.Height));
-            foreach (Item item in Render.items)
+            foreach (Item item in GameControl.render)
             {
                 if (item is Ball)
                     g.FillEllipse(Brushes.Black, new RectangleF(

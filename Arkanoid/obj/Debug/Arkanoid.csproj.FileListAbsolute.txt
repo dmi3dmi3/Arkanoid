@@ -11,7 +11,6 @@ F:\Users\1\Desktop\MyProjects\Arkanoid\Arkanoid\Arkanoid\obj\Debug\Arkanoid.pdb
 F:\Users\1\Desktop\MyProjects\Arkanoid\Arkanoid\bin\Debug\Arkanoid.exe.config
 F:\Users\1\Desktop\MyProjects\Arkanoid\Arkanoid\bin\Debug\Arkanoid.exe
 F:\Users\1\Desktop\MyProjects\Arkanoid\Arkanoid\bin\Debug\Arkanoid.pdb
-F:\Users\1\Desktop\MyProjects\Arkanoid\Arkanoid\obj\Debug\Arkanoid.csprojResolveAssemblyReference.cache
 F:\Users\1\Desktop\MyProjects\Arkanoid\Arkanoid\obj\Debug\Arkanoid.Form1.resources
 F:\Users\1\Desktop\MyProjects\Arkanoid\Arkanoid\obj\Debug\Arkanoid.Properties.Resources.resources
 F:\Users\1\Desktop\MyProjects\Arkanoid\Arkanoid\obj\Debug\Arkanoid.csproj.GenerateResource.Cache
